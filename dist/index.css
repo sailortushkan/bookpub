@@ -92,6 +92,12 @@ p {
     border: none;
     margin: 10px 0;
     padding: 10px 0;
+    transition-duration: 0.5s;
+}
+
+.grey_button:hover {
+    background-color: black;
+    cursor: pointer;
 }
 
 .funding {
@@ -99,4 +105,8 @@ p {
     font-weight: 400;
     font-style: italic;
     margin-bottom: 5px;
+}
+
+.loading {
+    text-align: center;
 }
