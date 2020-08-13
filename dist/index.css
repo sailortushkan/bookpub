@@ -1,0 +1,112 @@
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.author_card {
+    display: flex;
+    align-items: flex-start;
+}
+
+.author_contacts {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.author_contacts_item {
+    margin-top: 5px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-top: 15px;
+}
+
+.book_cover {
+    width: 350px;
+    margin-top: 30px;
+}
+
+.book_title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    margin-top: 30px;
+}
+
+.book_annotation {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.book_spec {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.book_card {
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.book_prices_container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.book_price {
+    text-align: center;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    margin: 15px;
+}
+
+.price_tag {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.column {
+    flex: 50%;
+}
+
+.grey_button {
+    width: 100%;
+    background-color: gray;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    color: white;
+    border: none;
+    margin: 10px 0;
+    padding: 10px 0;
+    transition-duration: 0.5s;
+}
+
+.grey_button:hover {
+    background-color: black;
+    cursor: pointer;
+}
+
+.funding {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.loading {
+    text-align: center;
+}
