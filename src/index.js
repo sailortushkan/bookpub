@@ -1,40 +1,64 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import '../dist/index.css';
 
+class App extends Component {
+
+    constructor(props) {
+      super(props);
+      this.state = {
+          book: null,
+          author: null,
+      };
+    }
+
+    componentDidMount() {
+        fetch('https://api.airtable.com/v0/app8QPpFH2bwTTvxH/Books?api_key=keyXFiwBMjZtYhcLw')
+        .then((resp) => resp.json())
+        .then(data => {
+            this.setState({book: data.records[0].fields});
+        }).catch(err => {
+            // Error
+        });
+
+        fetch('https://api.airtable.com/v0/app8QPpFH2bwTTvxH/Authors?api_key=keyXFiwBMjZtYhcLw')
+        .then((resp) => resp.json())
+        .then(data => {
+            this.setState({ author: data.records[0].fields});
+        }).catch(err => {
+            // Error
+        });
+    }
+
+    render() {
+        return (
+            <BookCard {...this.state} />
+        )
+    }
+  }
+
 function BookCard(props) {
-    const { 
-        name, 
-        annotation, 
-        pages, 
-        language, 
-        progress,
-        coverUrl, 
-        author, 
-        price_minimum, 
-        price_suggested, 
-        sum_collected, 
-        sum_expected 
-    } = props.bookinfo;
+    if (!props.book)
+        return <div className='loading'>Loading...</div>;
     return (
         <div className='book_card'>
             <div className='column'>
-                <img src={coverUrl} className='book_cover'></img>
+                <img src={props.book.coverUrl[0].url} alt={props.book.name} className='book_cover'></img>
             </div>
             <div className='column'>
-                <h1 className='book_title'>{name}</h1>
-                <p className='book_annotation'>{annotation}</p>
-                <p className='book_spec'>{pages} pages, in {language}</p>
-                <p className='book_spec'>{progress}% done</p>   
-                <p className='funding'>${sum_collected} out of ${sum_expected} collected!</p>            
-                <AuthorCard authorinfo = {author} /> 
+                <h1 className='book_title'>{props.book.name}</h1>
+                <p className='book_annotation'>{props.book.annotation}</p>
+                <p className='book_spec'>{props.book.pages} pages, in {props.book.language}</p>
+                <p className='book_spec'>{props.book.progress}% done</p>   
+                <p className='funding'>${props.book.sum_collected} out of ${props.book.sum_expected} collected!</p>            
+                <AuthorCard {...props.author} /> 
                 <div className='book_prices_container'>
                     <div className='book_price'>
-                        <p>${price_minimum}</p>
+                        <p>${props.book.price_minimum}</p>
                         <p className='price_tag'>minimum price</p>
                     </div>
                     <div className='book_price'>
-                        <p>${price_suggested}</p>
+                        <p>${props.book.price_suggested}</p>
                         <p className='price_tag'>suggested price</p>
                     </div>
                 </div>
@@ -46,18 +70,21 @@ function BookCard(props) {
 }
 
 function AuthorCard(props) {
-    const { name, email, avatarUrl, summary } = props.authorinfo;
+    if (!props.avatarUrl)
+        return <div>Loading...</div>;
     return (
         <div className='author_card'>
-            <img src={avatarUrl} alt={name} className='avatar'></img>
+            <img src={props.avatarUrl[0].url} alt={props.name} className='avatar'></img>
             <div className='author_contacts'>
-                <p className='author_contacts_item'>{name}</p>
-                <p className='author_contacts_item'>{email}</p>
-                <p className='author_contacts_item'>{summary}</p>
+                <p className='author_contacts_item'>{props.name}</p>
+                <p className='author_contacts_item'>{props.email}</p>
+                <p className='author_contacts_item'>{props.summary}</p>
             </div>
         </div>
     )
 }
+
+
 
 let book = {
     name: 'Walden. Life in the woods',
@@ -79,6 +106,6 @@ let book = {
 }
 
 ReactDOM.render(
-    <BookCard bookinfo={book} />,
+    <App />,
     document.getElementById('root')
   );
