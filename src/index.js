@@ -48,7 +48,7 @@ function BookCard(props) {
 function AuthorCard(props) {
     const { name, email, avatarUrl, summary } = props.authorinfo;
     return (
-        <div className='authorcard'>
+        <div className='author_card'>
             <img src={avatarUrl} alt={name} className='avatar'></img>
             <div className='author_contacts'>
                 <p className='author_contacts_item'>{name}</p>
